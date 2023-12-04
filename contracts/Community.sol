@@ -77,7 +77,6 @@ contract Community {
         emit IdentificationRequested(msg.sender);
     }
 
-
     /// @notice Performs vouching.
     /// @param candidate Account of a candidate vouching for is performed.
     /// @param signature Community member signature.
