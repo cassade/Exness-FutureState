@@ -14,7 +14,7 @@ While zero-knowledge prtocols are too complex and not considered for a current t
 
 1. If direct call is used for voching then it's easy to determine the vouching account (transaction sender) and the candidate vouching for is performed (transaction data). Instead of sending vouching transaction directly I used delegated execution to prevent determining the vouching account by transaction sender. Transaction may be sent by arbitrary account.
 2. Vouching account should sign a message containing the contract address (to prevent replay attack on similar contract) and the candidate address. The resulting signature is provided to the contract (transaction can be sent by any account). Then signature is verified, signer account is recovered and checked against current identified accounts (community members) and if the signer is a member the vouching counter is increased.
-3. To prevent double-vouching I need to keep something that allows me to determine that particular member is already vouched. I use hashes of signatures for this purposes. This approach is similar to storing password hashes instead of passwords, I can identify the fact of vouching without storing vouching data itself. Common approach with "nonce" is useless here because it allows to determine vouching member by the state of contract.
+3. To prevent double-vouching I need to keep something that allows me to determine that particular member is already vouched. I used hashes of signatures for this purposes. This approach is similar to storing password hashes instead of passwords, I can identify the fact of vouching without storing vouching data itself. Common approach with "nonce" is useless here because it allows to determine vouching member by the state of the contract.
 
 In general this approach does not allow to determine who vouches for whom by the state of the contract and by common tools like blockchain explorers. But due to the open nature of the blockchain still it's possible to reproduce smart-contract and its particular state, then "replay" any transaction and pull out any required info.
 
@@ -35,7 +35,7 @@ For details see the code of the [smart-contract](/contracts/Community.sol) and [
 Due to time restrictions and to keep things simple some features are not implemented (and there were no requirements for this features):
 
 - retrieving a list of community members
-- retrieving a list of registered candidates (requires different approach for the contract state layout).
+- retrieving a list of registered candidates (because it is a dynamic list it requires different approach for the contract state layout).
 
 ### Tools used
 
